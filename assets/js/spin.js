@@ -65,7 +65,7 @@ function startSpinning() {
 }
 
 function slowDownSpin() {
-    currentInterval *= 1.2;
+    currentInterval *= 1.3;
 }
 
 function getRandomIndex(excludedIndexes) {
