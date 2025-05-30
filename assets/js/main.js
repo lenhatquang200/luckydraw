@@ -1,9 +1,12 @@
-const APP_URL = "http://luckydraw.btec";
+// const APP_URL = "http://luckydraw.btec";
+const APP_URL = "https://luckydraw.webdevelopment.io.vn"
 var currentPrize, currentPrizeText;
 const timestamp = new Date().getTime(); // Get current timestamp
 
-$('#setting').on('click', function() {
-
+$('#setting').on('click', function () {
+    $('#settingModal').modal('show');
+    if ($('#spinModal').hasClass('show'))
+        $('#spinModal').modal('hide');
 });
 
 
@@ -12,23 +15,23 @@ const passcode = "MTIzYnRlYw=="; // Set your passcode here
 // Check if passcode has been entered before
 let isPasscodeEntered = localStorage.getItem('isPasscodeEntered') === 'true';
 
-$('#setting').on('click', function() {
-    if (!isPasscodeEntered) {
-        const userPasscode = prompt("Please enter the passcode:");
-
-        if (btoa(userPasscode) === passcode) {
-            isPasscodeEntered = true; // Set flag to true once correct passcode is entered
-            localStorage.setItem('isPasscodeEntered', 'true'); // Save status in localStorage
-            $('#settingModal').modal('show');
-        } else {
-            alert("Incorrect passcode.");
-        }
-    } else {
-        $('#settingModal').modal('show');
-        if( $('#spinModal').hasClass('show'))
-            $('#spinModal').modal('hide');
-    }
-});
+// $('#setting').on('click', function () {
+//     if (!isPasscodeEntered) {
+//         const userPasscode = prompt("Please enter the passcode:");
+//
+//         if (btoa(userPasscode) === passcode) {
+//             isPasscodeEntered = true; // Set flag to true once correct passcode is entered
+//             localStorage.setItem('isPasscodeEntered', 'true'); // Save status in localStorage
+//             $('#settingModal').modal('show');
+//         } else {
+//             alert("Incorrect passcode.");
+//         }
+//     } else {
+//         $('#settingModal').modal('show');
+//         if ($('#spinModal').hasClass('show'))
+//             $('#spinModal').modal('hide');
+//     }
+// });
 
 
 $('#spinModal').on('hidden.bs.modal', function (event) {
@@ -37,13 +40,13 @@ $('#spinModal').on('hidden.bs.modal', function (event) {
 
 function loadPrizeSetting() {
     $.ajax({
-        url: APP_URL + '/data/prizeSetting.json?t=' + timestamp+Math.random(),
+        url: APP_URL + '/data/prizeSetting.json?t=' + timestamp + Math.random(),
         method: 'GET',
-        success: function(data) {
+        success: function (data) {
             var prizeSetting = "";
             var prizeSelect = "";
             $('#prizeSelect').empty();
-            $.each(data, function(key, value) {
+            $.each(data, function (key, value) {
                 prizeSetting += value + "\n";
                 prizeSelect += `<option value="${key}">${value}</option>`;
             });
@@ -54,11 +57,10 @@ function loadPrizeSetting() {
     });
 }
 
-$('#saveSetting').on('click', function() {
+$('#saveSetting').on('click', function () {
     savePrizeSetting()
 });
-function savePrizeSetting()
-{
+function savePrizeSetting() {
     var prizeSetting = $('#prizeSetting').val().trim();
     $.ajax({
         url: APP_URL + '/data/api.php',
@@ -67,22 +69,22 @@ function savePrizeSetting()
             action: 'savePrizeSetting',
             prizeSetting: prizeSetting
         },
-        success: function(response) {
+        success: function (response) {
             toastr.success("Đã cập nhật giải thưởng");
             loadPrizeSetting();
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             console.error('Error saving the data:', textStatus, errorThrown);
         }
     });
 }
 function loadParticipants(callback) {
     $.ajax({
-        url: APP_URL + '/data/participants.json?t=' + timestamp+Math.random(),
+        url: APP_URL + '/data/participants.json?t=' + timestamp + Math.random(),
         method: 'GET',
-        success: function(data) {
+        success: function (data) {
             var participants = "";
-            $.each(data, function(key, value) {
+            $.each(data, function (key, value) {
                 participants += value + "\n";
             });
             participants = participants.trim();
@@ -92,10 +94,10 @@ function loadParticipants(callback) {
     });
 }
 
-$('#saveParticipants').on('click', function() {
+$('#saveParticipants').on('click', function () {
     saveParticipants()
 });
-function saveParticipants(){
+function saveParticipants() {
     var participants = $('#participantSetting').val().trim();
     $.ajax({
         url: APP_URL + '/data/api.php',
@@ -104,24 +106,24 @@ function saveParticipants(){
             action: 'saveParticipants',
             participants: participants
         },
-        success: function(response) {
+        success: function (response) {
             toastr.success("Đã cập nhật Danh sách tham dự");
             loadParticipants(); // Reload participants
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             console.error('Error saving the data:', textStatus, errorThrown);
         }
     });
 }
 function loadWinners() {
     $.ajax({
-        url: APP_URL + '/data/spinResults.json?t=' + timestamp+Math.random(),
+        url: APP_URL + '/data/spinResults.json?t=' + timestamp + Math.random(),
         method: 'GET',
-        success: function(data) {
+        success: function (data) {
             const tableBody = $('#winnersTableBody');
             tableBody.empty();
 
-            $.each(data, function(index, winner) {
+            $.each(data, function (index, winner) {
                 tableBody.append(`
                     <tr data-index="${index}">
                         <td class="text-center">${index + 1}</td>
@@ -134,24 +136,24 @@ function loadWinners() {
             // Attach click event to remove buttons
 
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             console.error('Error loading winners:', textStatus, errorThrown);
         }
     });
 }
-$('#clearResult').on('click', function() {
+$('#clearResult').on('click', function () {
     $.ajax({
         url: APP_URL + '/data/api.php',
         method: 'POST',
         data: {
             action: 'clearWinners'
         },
-        success: function(response) {
+        success: function (response) {
             toastr.success("Danh sách trúng thưởng đã được xoá");
             $('#winnersTableBody').empty(); // Clear the table body
             excludedIndexes = []; // Reset the excludedIndexes array
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             console.error('Error clearing the winners list:', textStatus, errorThrown);
         }
     });
@@ -176,7 +178,7 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
             resolve('Animation ended');
         }
 
-        node.addEventListener('animationend', handleAnimationEnd, {once: true});
+        node.addEventListener('animationend', handleAnimationEnd, { once: true });
     });
 animateCSS('#specialGift', 'bounce').then((message) => {
     // Do something after the animation

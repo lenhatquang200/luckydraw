@@ -1,10 +1,4 @@
-
-$('#spin').on('click', function() {
-    if($('#prizeSetting').val()=="" || $('#participantSetting').val()=="")
-    {
-        toastr.error("Chưa thiết lập phần thưởng hoặc người tham dự!")
-        return;
-    }
+$('#spin').on('click', function () {
     $('.spinning').show();
     $('.spinResult').hide();
     $('#startSpin').removeClass('disabled');
@@ -12,24 +6,35 @@ $('#spin').on('click', function() {
     $('#settingModal').modal('hide');
     $('#spinModal').modal('show');
     currentPrize = $('#prizeSelect').val();
-    currentPrizeText = currentPrize==""?"Nháp":$('#prizeSelect option:selected').text();
+    currentPrizeText = currentPrize == "" ? "" : $('#prizeSelect option:selected').text();
     $('.currentPrize').html(currentPrizeText);
-
+    if (currentPrizeText == "") {
+        $('.currentPrize').hide();
+    } else {
+        $('.currentPrize').show();
+    }
 });
 
-$('#startSpin').on('click', function() {
-    loadParticipants(function() {
+$('#startSpin').on('click', function () {
+    loadParticipants(function () {
         startSpinning();
     });
 });
 
-let initialInterval = 50;
+$(document).on('click', '#continueSpin', function () {
+    $('.spinResult').hide();
+    $('.spinning').show();
+    $('#luckynumber').html(' -- -- -- -- -- -- -- ');
+    $('#startSpin').removeClass('disabled');
+});
+
+let initialInterval = 80;
 let currentInterval = initialInterval;
 let elapsedTicks = 0;
 let excludedIndexes = [];
 let luckyEntries;
-const stopIntervalAfter = 60;
-const slowDownIntervalAfter = 50;
+const stopIntervalAfter = 90;
+const slowDownIntervalAfter = 80;
 
 function updateLuckyEntries() {
     return $('#participantSetting').val()
@@ -43,23 +48,18 @@ function startSpinning() {
     $('button').addClass('disabled')
     $('#startSpin').addClass('disabled');
     luckyEntries = updateLuckyEntries(); // Update luckyEntries before starting the spin
-    if(typeof luckyEntries== "undefined"||luckyEntries.length==0 || currentPrize=="" || currentPrize==null)
-    {
+    if (typeof luckyEntries == "undefined" || luckyEntries.length == 0) {
         $('#startSpin').removeClass('disabled');
         $('button').removeClass('disabled')
-        toastr.error("Chưa thiết lập phần thưởng hoặc người tham dự!")
+        toastr.error("Chưa thiết lập người tham dự!")
         return;
-
     }
-    if(luckyEntries.length==excludedIndexes.length)
-    {
+    if (luckyEntries.length == excludedIndexes.length) {
         toastr.error("Không còn ai để quay số!")
         $('#startSpin').removeClass('disabled');
         $('button').removeClass('disabled')
         return;
-    }
-    else
-    {
+    } else {
         intervalId = setInterval(updateLuckyDisplay, currentInterval);
     }
 }
@@ -93,19 +93,21 @@ function updateLuckyDisplay() {
         elapsedTicks = 0;
         excludedIndexes.push(newIndex); // Add the newly selected index to excludedIndexes
         setTimeout(() => {
-            console.log("Final index: " + newIndex);
             $('button').removeClass('disabled')
             $('#startSpin').removeClass('disabled');
             $('#resultSpin').html(luckyEntries[newIndex])
             $('.spinning').hide();
             $('.spinResult').show();
-            storeResult(luckyEntries[newIndex],currentPrizeText)
-
+            if (currentPrizeText == "") {
+                $(".spinResult span.text-primary.fs-1, .spinResult b.currentPrize").hide();
+            } else {
+                $(".spinResult span.text-primary.fs-1, .spinResult b.currentPrize").show();
+            }
+            storeResult(luckyEntries[newIndex], currentPrizeText)
         }, 600);
     }
 }
-function storeResult(name,currentPrizeText)
-{
+function storeResult(name, currentPrizeText) {
     const result = {
         name: name,
         price: currentPrizeText
@@ -118,10 +120,10 @@ function storeResult(name,currentPrizeText)
             action: 'saveSpinResult',
             result: JSON.stringify(result)
         },
-        success: function(response) {
+        success: function (response) {
             loadWinners()
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             console.error('Error saving the result:', textStatus, errorThrown);
         }
     });

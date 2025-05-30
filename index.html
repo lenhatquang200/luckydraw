@@ -1,173 +1,183 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BTEC FPT - Cần Thơ - Quay số may mắn</title>
     <script src="https://kit.fontawesome.com/c6ccf656ee.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
-    <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="icon" href="//cms.btec.edu.vn/pluginfile.php/1/theme_adaptable/favicon/1694613006/btecfavicons.png" />
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=2">
 </head>
-<body>
-<button type="button" id="setting" class="btn btn-primary btn-circle mt-3 ms-1">
-    <i class="fa-solid fa-gear"></i>
-</button>
 
-<div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5 w-100 text-center" id="exampleModalLabel">
-                    <img src="https://fpt.edu.vn/Content/images/assets/Logo-Btec.png" style="height: 40px" alt="">
-                    Quay số may mắn
-                </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="d-flex justify-content-between">
+<body>
+    <button type="button" id="setting" class="btn btn-primary btn-circle mt-3 ms-1">
+        <i class="fa-solid fa-gear"></i>
+    </button>
+
+    <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 w-100 text-center" id="exampleModalLabel">
+                        <img src="https://fpt.edu.vn/Content/images/assets/Logo-Btec.png?v=2" style="height: 40px"
+                            alt="">
+                        Quay số may mắn
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
                                 <select id="prizeSelect" class="form-select">
                                 </select>
                                 <a href="javascript:" id="spin" class="btn btn-primary btn-sm ms-3">Quay thưởng</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row my-3">
-                    <p>Danh sách trúng thưởng
-                        <a href="javascript:" id="clearResult" class="btn btn-sm btn-outline-primary">Xoá danh sách trúng thưởng</a></p>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th class="text-center">STT</th>
-                                <th class="text-center">Giải</th>
-                                <th class="">Người trúng thưởng</th>
-                            </tr>
-                        </thead>
-                        <tbody id="winnersTableBody">
-                        <!-- Winners will be inserted here by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-5 ">
-                        <div class="p-2 border">
-                            <p class="d-flex justify-content-between align-items-end">
-                                <label for="" >Cài đặt giải thưởng</label>
-                                <a href="javascript:" id="saveSetting" class="btn btn-sm rounded-circle btn-outline-primary">
-                                    <i class="fa-solid fa-check"></i>
-                                </a>
-                            </p>
-                            <textarea name="" id="prizeSetting" rows="6" class="form-control"></textarea>
-                        </div>
+                    <div class="row my-3">
+                        <p>Danh sách trúng thưởng
+                            <a href="javascript:" id="clearResult" class="btn btn-sm btn-outline-primary">Xoá danh sách
+                                trúng thưởng</a>
+                        </p>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">STT</th>
+                                    <th class="text-center">Giải</th>
+                                    <th class="">Người trúng thưởng</th>
+                                </tr>
+                            </thead>
+                            <tbody id="winnersTableBody">
+                                <!-- Winners will be inserted here by JavaScript -->
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="col-7 ">
-                        <div class="border p-2">
-                            <p class="d-flex justify-content-between align-items-end">
-                                <label for="" >Danh sách tham dự</label>
-                                <a href="javascript:" id="saveParticipants" class="btn btn-sm rounded-circle  btn-outline-primary">
-                                    <i class="fa-solid fa-check"></i>
-                                </a>
-                            </p>
-                            <textarea name="" id="participantSetting" rows="6" class="form-control"></textarea>
+                    <hr>
+                    <div class="row">
+                        <div class="col-5 ">
+                            <div class="p-2 border">
+                                <p class="d-flex justify-content-between align-items-end">
+                                    <label for="">Cài đặt giải thưởng</label>
+                                    <a href="javascript:" id="saveSetting"
+                                        class="btn btn-sm rounded-circle btn-outline-primary">
+                                        <i class="fa-solid fa-check"></i>
+                                    </a>
+                                </p>
+                                <textarea name="" id="prizeSetting" rows="6" class="form-control"></textarea>
+                            </div>
                         </div>
+                        <div class="col-7 ">
+                            <div class="border p-2">
+                                <p class="d-flex justify-content-between align-items-end">
+                                    <label for="">Danh sách tham dự</label>
+                                    <a href="javascript:" id="saveParticipants"
+                                        class="btn btn-sm rounded-circle  btn-outline-primary">
+                                        <i class="fa-solid fa-check"></i>
+                                    </a>
+                                </p>
+                                <textarea name="" id="participantSetting" rows="6" class="form-control"></textarea>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="spinModal" tabindex="-1" aria-labelledby="spinModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content text-center justify-content-center align-items-center">
-            <button type="button" style="position: absolute;
+    <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="spinModal" tabindex="-1"
+        aria-labelledby="spinModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content text-center justify-content-center align-items-center">
+                <button type="button" style="position: absolute;
     top: -3px;
     right: -3px;
     box-shadow: none;" data-bs-dismiss="modal" class="btn btn-primary btn-circle">
-                <i class="fa-solid fa-times"></i>
-            </button>
-            <div class="container">
-                <div class="spinning">
-                    <h1 id="" class="text-primary fs-1 currentPrize"></h1>
-                    <h1 id="luckynumber" class="text-primary fs-1 my-5"> -- -- -- -- -- -- -- </h1>
-                    <a href="javascript:" id="startSpin" class="w-25 btn btn-primary btn-lg">
-                        BẮT ĐẦU
-                    </a>
-                </div>
-                <div class="spinResult" style="display: none">
-                    <dotlottie-player src="https://lottie.host/f1ff7b5d-aa51-4bdc-ba73-fdcb8388dee9/7QM24NkP8I.json"
-                                      background="transparent" speed="1"
-                                      style="width: 600px;
+                    <i class="fa-solid fa-times"></i>
+                </button>
+                <div class="container">
+                    <div class="spinning">
+                        <h1 id="" class="text-primary fs-1 currentPrize"></h1>
+                        <h1 id="luckynumber" class="text-primary fs-1 my-5"> -- -- -- -- -- -- -- </h1>
+                        <a href="javascript:" id="startSpin" class="w-25 btn btn-primary btn-lg">
+                            BẮT ĐẦU
+                        </a>
+                    </div>
+                    <div class="spinResult" style="display: none;     margin-top: 10%;">
+                        <!-- <dotlottie-player
+                            src="https://lottie.host/f1ff7b5d-aa51-4bdc-ba73-fdcb8388dee9/7QM24NkP8I.json?v=2"
+                            background="transparent" speed="1" style="width: 600px;
     height: 600px;
     position: absolute;
     top: -2%;
-    left: 28%;"
-                                      loop autoplay></dotlottie-player>
+    left: 28%;" loop autoplay></dotlottie-player> -->
 
-                    <h1 class="text-primary fs-1">CHÚC MỪNG</h1>
-                    <h1><b id="resultSpin" class="text-primary " style="font-size: 3rem" ></b></h1>
-                    <br>
-                    <span class="text-primary fs-1">ĐÃ ĐẠT ĐƯỢC </span><b class="text-primary fs-1 currentPrize"></b>
+                        <h1 class="text-primary fs-1">XIN CHÚC MỪNG</h1>
+                        <h1><b id="resultSpin" class="text-primary " style="font-size: 3rem"></b></h1>
+                        <br>
+                        <span class="text-primary fs-1">ĐÃ ĐẠT ĐƯỢC </span><b
+                            class="text-primary fs-1 currentPrize"></b>
+                        <br>
+                        <button id="continueSpin" class="btn btn-success btn-lg mt-3 " style=" z-index: 10;">Tiếp
+                            tục</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 
-<div style="position: absolute; bottom: 30px" class="text-center w-100 d-lg-block d-none">
-        <div class="container gift1 w-100 d-flex justify-content-evenly align-items-end">
-<!--            <img src="assets/images/7.png"-->
-<!--                 class=" animate__animated animate__backInLeft animate__slow  home-img" alt="" style="    transform: scaleX(-1);">-->
-            <img src="assets/images/2.png" id="specialGift"
-                 class="animate__animated animate__bounceInDown   animate__slow animate__delay-1s home-img" alt="" style="    height: 220px;">
-<!--            <img src="assets/images/6.png"-->
-<!--                 class=" animate__animated animate__backInRight animate__slow  home-img" alt="">-->
-        </div>
+    <!-- <div style="position: absolute; bottom: 30px" class="text-center w-100 d-lg-block d-none">
+        <div class="container gift1 w-100 d-flex justify-content-evenly align-items-end"> -->
+    <!--            <img src="assets/images/7.png"-->
+    <!--                 class=" animate__animated animate__backInLeft animate__slow  home-img" alt="" style="    transform: scaleX(-1);">-->
+    <!-- <img src="assets/images/2.png" id="specialGift"
+                class="animate__animated animate__bounceInDown   animate__slow animate__delay-1s home-img" alt=""
+                style="    height: 220px;"> -->
+    <!--            <img src="assets/images/6.png"-->
+    <!--                 class=" animate__animated animate__backInRight animate__slow  home-img" alt="">-->
+    <!-- </div>
 
-       <div class="container gift2 w-100 d-flex justify-content-evenly align-items-center">
-           <img src="assets/images/3.png"
-                class=" animate__animated animate__bounceInUp animate__delay-1s home-img" alt="">
-           <img src="assets/images/1.png"
-                class=" animate__animated animate__bounceInUp animate__delay-1s home-img" alt="" style="    transform: scaleX(-1);">
-           <img src="assets/images/4.png"
-                class=" animate__animated animate__bounceInUp animate__delay-1s home-img" alt="">
-<!--           <img src="assets/images/5.png"-->
-<!--                class=" animate__animated animate__bounceInUp animate__delay-1s home-img" alt="">-->
+        <div class="container gift2 w-100 d-flex justify-content-evenly align-items-center">
+            <img src="assets/images/3.png" class=" animate__animated animate__bounceInUp animate__delay-1s home-img"
+                alt="">
+            <img src="assets/images/1.png" class=" animate__animated animate__bounceInUp animate__delay-1s home-img"
+                alt="" style="    transform: scaleX(-1);">
+            <img src="assets/images/4.png" class=" animate__animated animate__bounceInUp animate__delay-1s home-img"
+                alt=""> -->
+    <!--           <img src="assets/images/5.png"-->
+    <!--                class=" animate__animated animate__bounceInUp animate__delay-1s home-img" alt="">-->
 
-       </div>
-</div>
+    <!-- </div>
+    </div> -->
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-        crossorigin="anonymous"></script>
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+    crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/spin.js"></script>
+<script src="assets/js/main.js?v=2"></script>
+<script src="assets/js/spin.js?v=2"></script>
 <script>
-    $('document').ready(function(){
+    $('document').ready(function () {
         loadPrizeSetting()
         loadParticipants()
         loadWinners()
     })
 </script>
+
 </html>

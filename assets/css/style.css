@@ -1,5 +1,5 @@
 body {
-    background: url(../images/bg_1.png);
+    background: url(../images/bg_1.png?v=2);
     background-size: cover;
     background-repeat: no-repeat;
     background-color: white;
@@ -17,34 +17,45 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.9);
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
     box-shadow: none;
 }
 
 :root {
     --bs-primary: #f7640f;
 }
-.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+
+.btn-check:checked+.btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check)+.btn:active {
     color: white;
     background-color: #f7640f;
     border-color: #f7640f;
 }
+
 .btn-primary {
     background-color: var(--bs-primary);
     border-color: var(--bs-primary);
 }
 
 .btn-primary:hover {
-    background-color: #e65c0f; /* Slightly darker shade for hover effect */
+    background-color: #e65c0f;
+    /* Slightly darker shade for hover effect */
     border-color: #e65c0f;
 }
 
-.btn-primary:active, .btn-primary.active {
-    background-color: #d9534f; /* Even darker shade for active effect */
+.btn-primary:active,
+.btn-primary.active {
+    background-color: #d9534f;
+    /* Even darker shade for active effect */
     border-color: #d9534f;
 }
 
-.btn-primary:focus, .btn-primary.focus {
+.btn-primary:focus,
+.btn-primary.focus {
     box-shadow: none;
 }
 
@@ -70,31 +81,35 @@ body {
     background-color: var(--bs-primary);
     border-color: var(--bs-primary);
 }
-#setting
-{
+
+#setting {
     z-index: 1056;
     position: absolute;
 }
-#spinModal .modal-content
-{
+
+#spinModal .modal-content {
     height: 90vh;
-    background: url("../images/bg_2.png");
+    background: url("../images/bg_2.png?v=3");
     background-size: cover;
     background-repeat: no-repeat;
     background-color: white;
     background-position: top;
 }
 
-.btn.disabled, .btn:disabled, fieldset:disabled .btn {
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
     color: var(--bs-btn-disabled-color);
     pointer-events: none;
     background-color: rgba(247, 100, 15, 0.76);
     border-color: rgba(247, 100, 15, 0.76);
     opacity: var(--bs-btn-disabled-opacity);
 }
-.home-img{
+
+.home-img {
     height: 170px;
 }
+
 /*.home-img {*/
 /*    animation: fadeIn 2s ease-in-out;*/
 /*    transition: transform 0.5s ease;*/
